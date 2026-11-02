@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Plataformas de cursos gratuitos com certificado, teste de carreira e dicas para estudar e conseguir trabalho.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Saber Sem Muros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: cabeçalho fixo · hero escuro em duas colunas com mapa de trilha · plataformas (foco) · como começar · teste de carreira · dicas de trabalho · dicas de estudo · CTA · rodapé */
+:root {
+  --bg: #f3f4f7;
+  --surface: #ffffff;
+  --surface-2: #e9ebf1;
+  --ink: #141826;
+  --muted: #586074;
+  --line: #d9dce5;
+  --accent: #c8213a;
+  --accent-ink: #ffffff;
+  --accent-soft: #fbe5e8;
+  --sun: #f0a92e;
+  --teal: #17707a;
+  --night: #111a2e;
+  --night-2: #1a2540;
+  --night-ink: #eef1f8;
+  --night-muted: #a9b3cc;
+  --c-tecnologia: #2f62c9;
+  --c-gestao: #17707a;
+  --c-industria: #c46a12;
+  --c-marketing: #b0306f;
+  --font-display: "Gloock", Georgia, "Times New Roman", serif;
+  --font-body: "Familjen Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1220; --surface: #171c2c; --surface-2: #20263a; --ink: #edf0f7; --muted: #a3abc0;
+    --line: #2a3147; --accent: #f0566b; --accent-ink: #1a0b0f; --accent-soft: #3b1a22;
+    --sun: #f4bb55; --teal: #5cc3cc; --night: #0a0f1c; --night-2: #141c33;
+    --c-tecnologia: #7aa2f2; --c-gestao: #5cc3cc; --c-industria: #f0a35a; --c-marketing: #ef7ab3;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1220; --surface: #171c2c; --surface-2: #20263a; --ink: #edf0f7; --muted: #a3abc0;
+  --line: #2a3147; --accent: #f0566b; --accent-ink: #1a0b0f; --accent-soft: #3b1a22;
+  --sun: #f4bb55; --teal: #5cc3cc; --night: #0a0f1c; --night-2: #141c33;
+  --c-tecnologia: #7aa2f2; --c-gestao: #5cc3cc; --c-industria: #f0a35a; --c-marketing: #ef7ab3;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 60; background: var(--night);
+}
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+button { font: inherit; }
+.ta-wrap {
+  max-width: 1160px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Botões ---------- */
+.ta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 22px; border-radius: 999px; border: 2px solid transparent;
+  font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.ta-btn:hover { transform: translateY(-1px); }
+.ta-btn-primary { background: var(--accent); color: #fff; }
+.ta-btn-primary:hover { background: #a81a30; }
+.ta-btn-ghost { border-color: rgba(238,241,248,.35); color: var(--night-ink); background: transparent; }
+.ta-btn-ghost:hover { border-color: var(--night-ink); }
+.ta-btn-outline { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.ta-btn-outline:hover { border-color: var(--ink); }
+
+/* ---------- Cabeçalho ---------- */
+.ta-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: color-mix(in srgb, var(--night) 92%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.ta-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.ta-logo {
+  display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--night-ink); font-family: var(--font-display); font-size: 24px; letter-spacing: .01em;
+}
+.ta-logo svg { width: 34px; height: 34px; flex-shrink: 0; }
+.ta-nav { display: flex; align-items: center; gap: 4px; }
+.ta-nav-link {
+  background: none; border: 0; cursor: pointer; color: var(--night-muted);
+  padding: 8px 12px; border-radius: 8px; font-size: 15px; font-weight: 500;
+}
+.ta-nav-link:hover { color: var(--night-ink); background: rgba(255,255,255,.06); }
+.ta-nav .ta-btn { padding: 9px 18px; font-size: 15px; margin-left: 8px; }
+.ta-menu-btn {
+  display: none; background: none; border: 0; cursor: pointer; color: var(--night-ink);
+  width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 10px;
+}
+.ta-menu-btn svg { width: 24px; height: 24px; }
+
+/* ---------- Hero ---------- */
+.ta-hero { background: var(--night); color: var(--night-ink); overflow: hidden; position: relative; }
+.ta-hero::after {
+  content: ""; position: absolute; inset: auto -10% -40% auto; width: 620px; height: 620px;
+  background: radial-gradient(circle, rgba(200,33,58,.28), transparent 65%); pointer-events: none;
+}
+.ta-hero-inner {
+  display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center;
+  padding-block: 72px 80px; position: relative; z-index: 1;
+}
+.ta-hero-copy { min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+.ta-pill {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12); font-size: 14px; color: var(--night-muted);
+}
+.ta-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sun); }
+.ta-hero-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(42px, 6.4vw, 76px); line-height: 1.02; }
+.ta-hero-title em { font-style: normal; color: var(--sun); }
+.ta-hero-lead { font-size: 19px; color: var(--night-muted); max-width: 52ch; }
+.ta-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.ta-stats {
+  display: grid; grid-template-columns: repeat(4, auto); gap: 28px; justify-content: start;
+  padding-top: 26px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 6px;
+}
+.ta-stat strong { display: block; font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; }
+.ta-stat span { font-size: 13px; color: var(--night-muted); }
+.ta-map { min-width: 0; }
+.ta-map svg { width: 100%; height: auto; display: block; }
+.ta-map .trail-dash { animation: trailflow 2.4s linear infinite; }
+@keyframes trailflow { to { stroke-dashoffset: -28; } }
+.ta-map .node-pulse { transform-origin: center; transform-box: fill-box; animation: pulse 2.6s ease-out infinite; }
+@keyframes pulse { 0% { opacity: .55; transform: scale(1); } 100% { opacity: 0; transform: scale(2.4); } }
+
+/* ---------- Pilares ---------- */
+.ta-pillars { background: var(--surface); border-bottom: 1px solid var(--line); }
+.ta-pillars-inner { display: grid; grid-template-columns: repeat(3, 1fr); }
+.ta-pillar { display: flex; gap: 16px; align-items: flex-start; padding: 28px 24px; }
+.ta-pillar + .ta-pillar { border-left: 1px solid var(--line); }
+.ta-pillar-icon {
+  flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent);
+}
+.ta-pillar-icon svg { width: 24px; height: 24px; }
+.ta-pillar strong { display: block; font-size: 17px; margin-bottom: 2px; }
+.ta-pillar p { color: var(--muted); font-size: 15px; }
+
+/* ---------- Seções ---------- */
+.ta-section { padding-block: 88px; scroll-margin-top: 72px; }
+.ta-section-alt { background: var(--surface); border-block: 1px solid var(--line); }
+.ta-section-head { display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin-bottom: 40px; }
+.ta-kicker { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.ta-section-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4.4vw, 50px); line-height: 1.08; }
+.ta-section-lead { font-size: 18px; color: var(--muted); }
+
+/* ---------- Filtro ---------- */
+.ta-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; align-items: center; }
+.ta-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 999px; cursor: pointer; font-size: 15px; font-weight: 500;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  transition: background .15s, border-color .15s, color .15s;
+}
+.ta-chip:hover { border-color: var(--ink); }
+.ta-chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.ta-chip-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+/* ---------- Plataformas ---------- */
+.ta-platforms { display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; }
+.ta-plat { grid-column: span 2; }
+.ta-plat:nth-child(4), .ta-plat:nth-child(5) { grid-column: span 3; }
+.ta-plat {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  display: flex; flex-direction: column; overflow: hidden; min-width: 0;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.ta-plat:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -22px rgba(17,26,46,.45); border-color: transparent; }
+.ta-plat[hidden] { display: none; }
+.ta-plat-top { padding: 24px 24px 20px; display: flex; gap: 16px; align-items: center; border-bottom: 1px solid var(--line); }
+.ta-mono {
+  flex-shrink: 0; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 22px; color: #fff; background: var(--plat-color);
+}
+.ta-plat-name { font-family: var(--font-display); font-weight: 400; font-size: 25px; line-height: 1.1; }
+.ta-plat-focus { font-size: 14px; color: var(--muted); }
+.ta-plat-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.ta-plat-desc { color: var(--muted); font-size: 15px; }
+.ta-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.ta-badge {
+  font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+  background: var(--surface-2); color: var(--ink);
+}
+.ta-courses-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ta-courses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.ta-course {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 11px 14px; border-radius: 10px; background: var(--bg); border: 1px solid transparent;
+  transition: border-color .15s, background .15s;
+}
+.ta-course-name { font-weight: 600; font-size: 15px; min-width: 0; }
+.ta-tag { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.ta-tag i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.ta-course.is-hit { border-color: var(--hit); background: var(--surface); }
+.ta-plat-link {
+  margin-top: auto; display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 16px; border-radius: 10px; text-decoration: none; font-weight: 600;
+  background: var(--ink); color: var(--bg); transition: background .15s;
+}
+.ta-plat-link:hover { background: var(--accent); color: #fff; }
+.ta-plat-link svg { width: 18px; height: 18px; }
+
+/* ---------- Como começar ---------- */
+.ta-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 56px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.ta-step { padding: 28px; display: flex; flex-direction: column; gap: 8px; }
+.ta-step + .ta-step { border-left: 1px solid var(--line); }
+.ta-step-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--accent); }
+.ta-step strong { font-size: 18px; }
+.ta-step p { color: var(--muted); font-size: 15px; }
+
+/* ---------- Teste ---------- */
+.ta-quiz-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
+.ta-quiz-aside { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.ta-area-list { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.ta-area-item { display: flex; gap: 12px; align-items: center; font-weight: 600; }
+.ta-area-item span { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+.ta-area-item small { font-weight: 400; color: var(--muted); font-size: 14px; }
+.ta-quiz {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 20px;
+  padding: 32px; min-width: 0; box-shadow: 0 24px 60px -40px rgba(17,26,46,.5);
+}
+.ta-quiz-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ta-progress { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin-bottom: 28px; }
+.ta-progress-bar { height: 100%; width: 10%; background: linear-gradient(90deg, var(--accent), var(--sun)); border-radius: 999px; transition: width .3s ease; }
+.ta-q-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 3vw, 30px); line-height: 1.2; margin-bottom: 22px; }
+.ta-options { display: grid; gap: 10px; }
+.ta-option {
+  text-align: left; padding: 15px 18px; border-radius: 12px; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+  font-size: 16px; display: flex; gap: 14px; align-items: center;
+  transition: border-color .15s, background .15s, transform .1s;
+}
+.ta-option:hover { border-color: var(--ink); }
+.ta-option:active { transform: scale(.99); }
+.ta-option.is-chosen { border-color: var(--accent); background: var(--accent-soft); }
+.ta-option-key {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+  font-weight: 700; font-size: 14px; background: var(--surface-2); color: var(--muted);
+}
+.ta-option.is-chosen .ta-option-key { background: var(--accent); color: #fff; }
+.ta-quiz-nav { display: flex; justify-content: space-between; margin-top: 22px; gap: 12px; }
+.ta-link-btn { background: none; border: 0; cursor: pointer; color: var(--muted); font-weight: 600; padding: 8px 0; }
+.ta-link-btn:hover { color: var(--ink); }
+.ta-link-btn:disabled { opacity: .35; cursor: default; }
+.ta-result-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+.ta-result-area { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 40px); line-height: 1.1; color: var(--res-color); }
+.ta-result-text { color: var(--muted); }
+.ta-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.ta-bar-row { display: grid; grid-template-columns: 150px 1fr 44px; gap: 12px; align-items: center; font-size: 14px; }
+.ta-bar-track { height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.ta-bar-fill { height: 100%; border-radius: 999px; transition: width .6s ease; }
+.ta-bar-row b { text-align: right; font-variant-numeric: tabular-nums; }
+.ta-result-block { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+.ta-result-block h4 { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ta-careers { display: flex; flex-wrap: wrap; gap: 8px; }
+.ta-career { padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+.ta-rec { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.ta-rec a {
+  display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--line); text-decoration: none;
+}
+.ta-rec a:hover { border-color: var(--ink); }
+.ta-rec span { color: var(--muted); font-size: 14px; flex-shrink: 0; }
+.ta-result-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.ta-disclaimer { font-size: 13px; color: var(--muted); margin-top: 16px; }
+.ta-res-level { align-self: flex-start; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--res-color); color: var(--res-color); }
+.ta-res-feedback { background: var(--surface); border-left: 4px solid var(--accent); border-radius: 10px; padding: 16px 18px; margin-bottom: 22px; font-size: 15px; }
+.ta-res-quotes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.ta-res-quotes li { font-size: 15px; color: var(--muted); font-style: italic; padding-left: 14px; border-left: 2px solid var(--line); }
+.ta-res-plan { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; }
+.ta-res-plan li::marker { color: var(--accent); font-weight: 700; }
+
+/* ---------- Dicas de trabalho ---------- */
+.ta-jobs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.ta-job {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0;
+}
+.ta-job-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-2); color: var(--teal); }
+.ta-job-icon svg { width: 22px; height: 22px; }
+.ta-job h3 { font-size: 19px; font-weight: 700; }
+.ta-job p { color: var(--muted); font-size: 15px; }
+.ta-job-feature { grid-column: span 2; background: var(--night); color: var(--night-ink); border-color: var(--night); flex-direction: row; gap: 28px; align-items: center; }
+.ta-job-feature p { color: var(--night-muted); }
+.ta-job-feature .ta-job-icon { background: rgba(255,255,255,.08); color: var(--sun); }
+.ta-job-feature-text { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.ta-job-feature h3 { font-family: var(--font-display); font-weight: 400; font-size: 28px; }
+.ta-cv { flex-shrink: 0; width: 170px; background: #fff; border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 6px; transform: rotate(3deg); box-shadow: 0 16px 30px -12px rgba(0,0,0,.5); }
+.ta-cv i { display: block; height: 6px; border-radius: 3px; background: #d6dae3; }
+.ta-cv i.h { height: 10px; width: 60%; background: #111a2e; }
+.ta-cv i.a { background: #c8213a; width: 40%; margin-top: 6px; }
+.ta-cv i.s { width: 80%; }
+
+/* ---------- Dicas de estudo ---------- */
+.ta-study { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+.ta-study-item { display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding-block: 22px; border-top: 1px solid var(--line); }
+.ta-study-icon { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.ta-study-icon svg { width: 24px; height: 24px; }
+.ta-study-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.ta-study-item p { color: var(--muted); font-size: 15px; }
+
+/* ---------- CTA ---------- */
+.ta-cta { padding-block: 0 88px; }
+.ta-cta-box {
+  background: var(--accent); color: #fff; border-radius: 24px; padding: 56px 48px;
+  display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.ta-cta-box::before {
+  content: ""; position: absolute; right: -60px; top: -80px; width: 320px; height: 320px; border-radius: 50%;
+  border: 40px solid rgba(255,255,255,.1);
+}
+.ta-cta-box h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; max-width: 18ch; position: relative; }
+.ta-cta-box .ta-btn { background: #fff; color: #8e1426; position: relative; }
+
+/* ---------- Rodapé ---------- */
+.ta-footer { background: var(--night); color: var(--night-muted); padding-block: 56px 40px; font-size: 15px; }
+.ta-footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.ta-footer .ta-logo { margin-bottom: 14px; }
+.ta-footer h4 { color: var(--night-ink); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 14px; }
+.ta-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.ta-footer a { text-decoration: none; }
+.ta-footer a:hover, .ta-footer .ta-foot-link:hover { color: var(--night-ink); }
+.ta-foot-link { background: none; border: 0; padding: 0; cursor: pointer; color: inherit; text-align: left; }
+.ta-footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 980px) {
+  .ta-hero-inner { grid-template-columns: 1fr; padding-block: 56px 64px; }
+  .ta-map { max-width: 520px; }
+  .ta-platforms { grid-template-columns: 1fr 1fr; }
+  .ta-plat, .ta-plat:nth-child(4), .ta-plat:nth-child(5) { grid-column: span 1; }
+  .ta-quiz-grid { grid-template-columns: 1fr; gap: 32px; }
+  .ta-jobs { grid-template-columns: 1fr 1fr; }
+  .ta-footer-grid { grid-template-columns: 1fr 1fr; }
+  .ta-footer-grid > :first-child { grid-column: span 2; }
+}
+@media (max-width: 860px) {
+  .ta-menu-btn { display: inline-flex; }
+  .ta-nav {
+    display: none; position: absolute; left: 0; right: 0; top: 68px;
+    flex-direction: column; align-items: stretch; gap: 4px; background: var(--night);
+    padding: 12px max(20px, env(safe-area-inset-right, 0px)) 20px max(20px, env(safe-area-inset-left, 0px));
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .ta-header.is-open .ta-nav { display: flex; }
+  .ta-nav-link { text-align: left; padding: 12px; font-size: 16px; }
+  .ta-nav .ta-btn { margin: 8px 0 0; justify-content: center; }
+  .ta-pillars-inner { grid-template-columns: 1fr; }
+  .ta-pillar + .ta-pillar { border-left: 0; border-top: 1px solid var(--line); }
+  .ta-steps { grid-template-columns: 1fr; }
+  .ta-step + .ta-step { border-left: 0; border-top: 1px solid var(--line); }
+  .ta-study { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .ta-section { padding-block: 64px; }
+  .ta-stats { grid-template-columns: repeat(2, auto); gap: 20px 32px; }
+  .ta-platforms, .ta-jobs { grid-template-columns: 1fr; }
+  .ta-job-feature { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+  .ta-cv { display: none; }
+  .ta-quiz { padding: 22px; }
+  .ta-bar-row { grid-template-columns: 110px 1fr 40px; }
+  .ta-cta-box { padding: 40px 26px; }
+  .ta-footer-grid { grid-template-columns: 1fr; }
+  .ta-footer-grid > :first-child { grid-column: span 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= CABEÇALHO ================= -->
+<header class="ta-header">
+  <div class="ta-wrap ta-header-inner">
+    <button type="button" class="ta-logo" data-go="topo" aria-label="Saber Sem Muros, voltar ao início">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#c8213a"/><path d="M9 29c6 0 6-9 11-9s5-9 11-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 5.5"/><circle cx="9" cy="29" r="3.2" fill="#f0a92e"/><circle cx="31" cy="11" r="3.2" fill="#fff"/></svg>
+      Saber Sem Muros
+    </button>
+    <nav class="ta-nav" aria-label="Navegação principal">
+      <button type="button" class="ta-nav-link" data-go="plataformas">Plataformas</button>
+      <button type="button" class="ta-nav-link" data-go="teste">Teste de carreira</button>
+      <button type="button" class="ta-nav-link" data-go="trabalho">Dicas de trabalho</button>
+      <button type="button" class="ta-nav-link" data-go="estudo">Dicas de estudo</button>
+      <button type="button" class="ta-btn ta-btn-primary" data-go="teste">Fazer o teste</button>
+    </nav>
+    <button type="button" class="ta-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="ta-hero ta-sec-topo">
+  <div class="ta-wrap ta-hero-inner">
+    <div class="ta-hero-copy">
+      <span class="ta-pill"><span class="ta-pill-dot"></span>Cursos gratuitos com certificado</span>
+      <h1 class="ta-hero-title">Aprender não deveria ter <em>preço</em>.</h1>
+      <p class="ta-hero-lead">Reunimos as plataformas mais confiáveis do Brasil e os cursos mais procurados em cada uma, para você dar o próximo passo na carreira, no seu ritmo e sem pagar nada.</p>
+      <div class="ta-hero-actions">
+        <button type="button" class="ta-btn ta-btn-primary" data-go="plataformas">
+          Ver plataformas
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </button>
+        <button type="button" class="ta-btn ta-btn-ghost" data-go="teste">Descobrir minha área</button>
+      </div>
+      <div class="ta-stats">
+        <div class="ta-stat"><strong>5</strong><span>plataformas</span></div>
+        <div class="ta-stat"><strong>15</strong><span>cursos em destaque</span></div>
+        <div class="ta-stat"><strong>R$ 0</strong><span>para estudar</span></div>
+        <div class="ta-stat"><strong>10</strong><span>perguntas no teste</span></div>
+      </div>
+    </div>
+    <div class="ta-map" aria-hidden="true">
+      <svg viewBox="0 0 480 440">
+        <rect x="10" y="10" width="460" height="420" rx="24" fill="#1a2540"/>
+        <path d="M34 10V430M58 10V430M82 10V430M106 10V430M130 10V430M154 10V430M178 10V430M202 10V430M226 10V430M250 10V430M274 10V430M298 10V430M322 10V430M346 10V430M370 10V430M394 10V430M418 10V430M442 10V430M10 34H470M10 58H470M10 82H470M10 106H470M10 130H470M10 154H470M10 178H470M10 202H470M10 226H470M10 250H470M10 274H470M10 298H470M10 322H470M10 346H470M10 370H470M10 394H470M10 418H470" stroke="rgba(255,255,255,.05)" fill="none"/>
+        <path d="M60 380 C 140 380, 120 300, 200 300 S 300 330, 320 250 S 220 180, 260 130 S 380 120, 420 70" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="14" stroke-linecap="round"/>
+        <path class="trail-dash" d="M60 380 C 140 380, 120 300, 200 300 S 300 330, 320 250 S 220 180, 260 130 S 380 120, 420 70" fill="none" stroke="#f0a92e" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 12"/>
+        <g font-family="Familjen Grotesk, system-ui, sans-serif" font-size="14" font-weight="600">
+          <circle cx="60" cy="380" r="16" fill="#c8213a" class="node-pulse"/>
+          <circle cx="60" cy="380" r="9" fill="#c8213a" stroke="#fff" stroke-width="3"/>
+          <rect x="84" y="364" width="96" height="30" rx="15" fill="#fff"/><text x="132" y="384" text-anchor="middle" fill="#111a2e">Você</text>
+          <circle cx="200" cy="300" r="8" fill="#111a2e" stroke="#7aa2f2" stroke-width="3"/>
+          <rect x="140" y="252" width="80" height="28" rx="14" fill="rgba(255,255,255,.1)"/><text x="180" y="271" text-anchor="middle" fill="#eef1f8">SENAI</text>
+          <circle cx="320" cy="250" r="8" fill="#111a2e" stroke="#5cc3cc" stroke-width="3"/>
+          <rect x="344" y="236" width="84" height="28" rx="14" fill="rgba(255,255,255,.1)"/><text x="386" y="255" text-anchor="middle" fill="#eef1f8">Sebrae</text>
+          <circle cx="260" cy="130" r="8" fill="#111a2e" stroke="#ef7ab3" stroke-width="3"/>
+          <rect x="70" y="116" width="168" height="28" rx="14" fill="rgba(255,255,255,.1)"/><text x="154" y="135" text-anchor="middle" fill="#eef1f8">Fundação Bradesco</text>
+          <circle cx="420" cy="70" r="12" fill="#f0a92e"/>
+          <path d="M414 70l4 4 8-8" fill="none" stroke="#111a2e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="268" y="40" width="130" height="28" rx="14" fill="#f0a92e"/><text x="333" y="59" text-anchor="middle" fill="#111a2e">Novo emprego</text>
+        </g>
+        <g font-family="Familjen Grotesk, system-ui, sans-serif">
+          <rect x="300" y="320" width="150" height="86" rx="14" fill="#fff"/>
+          <text x="318" y="346" font-size="12" font-weight="600" fill="#586074">CERTIFICADO</text>
+          <text x="318" y="368" font-size="16" font-weight="700" fill="#111a2e">Excel</text>
+          <rect x="318" y="382" width="80" height="6" rx="3" fill="#d9dce5"/>
+          <circle cx="424" cy="386" r="11" fill="#c8213a"/>
+          <path d="M419 386l3.5 3.5 6-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PILARES ================= -->
+<section class="ta-pillars" aria-label="Nossos princípios">
+  <div class="ta-wrap ta-pillars-inner">
+    <div class="ta-pillar">
+      <div class="ta-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15 14.2c3 0 6 1.6 6 4.8"/></svg></div>
+      <div><strong>Para todas as pessoas</strong><p>Cursos sem custo e, na maioria, sem exigência de escolaridade.</p></div>
+    </div>
+    <div class="ta-pillar">
+      <div class="ta-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.5 7 21l5-2.5 5 2.5-1.5-7.5"/></svg></div>
+      <div><strong>Com qualidade</strong><p>Somente instituições reconhecidas, com certificado ao final.</p></div>
+    </div>
+    <div class="ta-pillar">
+      <div class="ta-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <div><strong>Em qualquer fase da vida</strong><p>Online e no seu ritmo, para começar ou recomeçar.</p></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- ================= PLATAFORMAS ================= -->
+  <section class="ta-section ta-sec-plataformas">
+    <div class="ta-wrap">
+      <div class="ta-section-head">
+        <span class="ta-kicker">Plataformas</span>
+        <h2 class="ta-section-title">Onde estudar de graça, com certificado</h2>
+        <p class="ta-section-lead">Cinco plataformas confiáveis e os três cursos mais procurados em cada uma, escolhidos por popularidade e pela demanda do mercado de trabalho.</p>
+      </div>
+      <div class="ta-filter" role="group" aria-label="Filtrar cursos por área"></div>
+      <div class="ta-platforms"></div>
+
+      <div class="ta-steps">
+        <div class="ta-step"><span class="ta-step-num">1</span><strong>Escolha um curso</strong><p>Comece por uma área que combina com você. Se estiver em dúvida, faça o teste de carreira.</p></div>
+        <div class="ta-step"><span class="ta-step-num">2</span><strong>Crie sua conta</strong><p>O cadastro é gratuito e costuma pedir só nome, e-mail e CPF.</p></div>
+        <div class="ta-step"><span class="ta-step-num">3</span><strong>Conclua e baixe o certificado</strong><p>Finalize as atividades e adicione o certificado ao currículo e ao LinkedIn.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTE ================= -->
+  <section class="ta-section ta-section-alt ta-sec-teste">
+    <div class="ta-wrap ta-quiz-grid">
+      <div class="ta-quiz-aside">
+        <div class="ta-section-head" style="margin-bottom:0">
+          <span class="ta-kicker">Teste de carreira</span>
+          <h2 class="ta-section-title">Qual área combina com você?</h2>
+          <p class="ta-section-lead">Responda 10 perguntas rápidas sobre o que você gosta de fazer. No final, você vê sua área mais forte e os cursos gratuitos indicados para começar.</p>
+        </div>
+        <ul class="ta-area-list"></ul>
+      </div>
+      <div class="ta-quiz" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ================= DICAS DE TRABALHO ================= -->
+  <section class="ta-section ta-sec-trabalho">
+    <div class="ta-wrap">
+      <div class="ta-section-head">
+        <span class="ta-kicker">Dicas para conseguir trabalho</span>
+        <h2 class="ta-section-title">Do certificado à contratação</h2>
+        <p class="ta-section-lead">O curso abre a porta. Estas atitudes ajudam você a passar por ela.</p>
+      </div>
+      <div class="ta-jobs">
+        <article class="ta-job ta-job-feature">
+          <div class="ta-job-feature-text">
+            <div class="ta-job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+            <h3>Currículo de uma página</h3>
+            <p>Coloque seus dados de contato, um resumo de duas linhas, experiências (inclusive informais e voluntárias) e uma seção só para cursos e certificados. Adapte o resumo para cada vaga, usando as mesmas palavras do anúncio.</p>
+          </div>
+          <div class="ta-cv" aria-hidden="true"><i class="h"></i><i class="s"></i><i></i><i class="a"></i><i></i><i class="s"></i><i></i><i class="a"></i><i class="s"></i><i></i></div>
+        </article>
+        <article class="ta-job">
+          <div class="ta-job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg></div>
+          <h3>LinkedIn completo</h3>
+          <p>Foto clara, título com a área que você busca e todos os certificados na seção de licenças. Recrutadores pesquisam por palavras-chave.</p>
+        </article>
+        <article class="ta-job">
+          <div class="ta-job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg></div>
+          <h3>Treine a entrevista</h3>
+          <p>Para cada resposta, conte a situação, o que você fez e qual foi o resultado. Ensaie em voz alta pelo menos uma vez.</p>
+        </article>
+        <article class="ta-job">
+          <div class="ta-job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+          <h3>Pesquise a empresa</h3>
+          <p>Antes da entrevista, veja o site e as redes da empresa. Saber o que ela faz mostra interesse de verdade.</p>
+        </article>
+        <article class="ta-job">
+          <div class="ta-job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5 10.5 16M16 7.5 13.5 16M8.5 6h7"/></svg></div>
+          <h3>Fale com pessoas</h3>
+          <p>Conte para amigos, família e ex-colegas que você está buscando trabalho. Muitas vagas são preenchidas por indicação.</p>
+        </article>
+        <article class="ta-job">
+          <div class="ta-job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Não pague por vaga</h3>
+          <p>Empresas sérias não cobram para entrevistar ou contratar. Desconfie de pedidos de pagamento ou de dados bancários.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DICAS DE ESTUDO ================= -->
+  <section class="ta-section ta-section-alt ta-sec-estudo">
+    <div class="ta-wrap">
+      <div class="ta-section-head">
+        <span class="ta-kicker">Dicas de estudo</span>
+        <h2 class="ta-section-title">Estudar online sem desistir no meio</h2>
+        <p class="ta-section-lead">Cursos gratuitos dependem só de você. Estes hábitos ajudam a chegar até o certificado.</p>
+      </div>
+      <div class="ta-study">
+        <div class="ta-study-item">
+          <div class="ta-study-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+          <div><h3>Marque horário na agenda</h3><p>Escolha dias e horários fixos, como um compromisso. Constância vale mais do que maratonas.</p></div>
+        </div>
+        <div class="ta-study-item">
+          <div class="ta-study-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg></div>
+          <div><h3>Estude em blocos curtos</h3><p>25 minutos de foco e 5 de pausa. Deixe o celular longe enquanto o cronômetro corre.</p></div>
+        </div>
+        <div class="ta-study-item">
+          <div class="ta-study-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+          <div><h3>Anote com suas palavras</h3><p>Resumir o que aprendeu, sem copiar, é a forma mais rápida de perceber o que ainda não entendeu.</p></div>
+        </div>
+        <div class="ta-study-item">
+          <div class="ta-study-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3 3 3L8 19H5v-3z"/><path d="m16 5 3 3"/></svg></div>
+          <div><h3>Pratique logo depois</h3><p>Aprendeu uma fórmula no Excel? Use numa planilha sua no mesmo dia. A prática fixa o conteúdo.</p></div>
+        </div>
+        <div class="ta-study-item">
+          <div class="ta-study-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div>
+          <div><h3>Um curso por vez</h3><p>Termine um antes de começar outro. Certificado concluído conta mais do que cinco cursos pela metade.</p></div>
+        </div>
+        <div class="ta-study-item">
+          <div class="ta-study-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15 14.2c3 0 6 1.6 6 4.8"/></svg></div>
+          <div><h3>Estude com alguém</h3><p>Combine o mesmo curso com um amigo e expliquem o conteúdo um para o outro. Ensinar é aprender duas vezes.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="ta-section ta-cta" style="padding-top:88px">
+    <div class="ta-wrap">
+      <div class="ta-cta-box">
+        <h2>O primeiro passo da sua trilha começa hoje.</h2>
+        <button type="button" class="ta-btn" data-go="plataformas">Escolher meu curso</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= RODAPÉ ================= -->
+<footer class="ta-footer">
+  <div class="ta-wrap">
+    <div class="ta-footer-grid">
+      <div>
+        <button type="button" class="ta-logo" data-go="topo" aria-label="Saber Sem Muros, voltar ao início">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#c8213a"/><path d="M9 29c6 0 6-9 11-9s5-9 11-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 5.5"/><circle cx="9" cy="29" r="3.2" fill="#f0a92e"/><circle cx="31" cy="11" r="3.2" fill="#fff"/></svg>
+          Saber Sem Muros
+        </button>
+        <p>Projeto acadêmico inspirado na Agenda 2030: educação inclusiva, equitativa e de qualidade, com oportunidades de aprendizado ao longo de toda a vida.</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><button type="button" class="ta-foot-link" data-go="plataformas">Plataformas</button></li>
+          <li><button type="button" class="ta-foot-link" data-go="teste">Teste de carreira</button></li>
+          <li><button type="button" class="ta-foot-link" data-go="trabalho">Dicas de trabalho</button></li>
+          <li><button type="button" class="ta-foot-link" data-go="estudo">Dicas de estudo</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Plataformas</h4>
+        <ul class="ta-foot-plats"></ul>
+      </div>
+    </div>
+    <div class="ta-footer-bottom">
+      <span>Vagas e cursos podem mudar. Confira sempre o site oficial de cada plataforma.</span>
+      <span>Saber Sem Muros · 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function last(sel, root) { var l = (root || document).querySelectorAll(sel); return l[l.length - 1]; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- Dados ---------- */
+  var areas = {
+    tecnologia: { label: "Tecnologia", color: "var(--c-tecnologia)", short: "Dados, programação e IA",
+      text: "Você gosta de entender como as coisas funcionam por dentro, resolver problemas com lógica e aprender ferramentas novas. A área de tecnologia tem muitas vagas e cursos gratuitos para começar do zero.",
+      careers: ["Suporte técnico em TI", "Assistente de dados", "Desenvolvedor(a) júnior", "Analista de planilhas"] },
+    gestao: { label: "Gestão", color: "var(--c-gestao)", short: "Administração, finanças e projetos",
+      text: "Você é organizado, gosta de planejar e de ver metas sendo cumpridas. Empresas de todos os tamanhos precisam de pessoas que cuidem de processos, pessoas e dinheiro.",
+      careers: ["Assistente administrativo", "Auxiliar financeiro", "Atendimento ao cliente", "Empreendedor(a)"] },
+    industria: { label: "Indústria e logística", color: "var(--c-industria)", short: "Produção, manutenção e segurança",
+      text: "Você é prático, gosta de colocar a mão na massa e de ver o resultado do seu trabalho. Indústria e logística estão entre os setores que mais contratam com formação rápida.",
+      careers: ["Auxiliar de logística", "Técnico(a) em segurança do trabalho", "Operador(a) de produção", "Auxiliar de manutenção"] },
+    marketing: { label: "Marketing e vendas", color: "var(--c-marketing)", short: "Comunicação, redes e e-commerce",
+      text: "Você é comunicativo, criativo e gosta de lidar com pessoas. Marketing digital e vendas online crescem junto com o comércio pela internet.",
+      careers: ["Assistente de marketing digital", "Social media", "Vendedor(a)", "Atendente de e-commerce"] }
+  };
+  var areaKeys = ["tecnologia", "gestao", "industria", "marketing"];
+
+  var platforms = [
+    { name: "SENAI", mono: "SE", color: "#2f62c9", focus: "Indústria e tecnologia",
+      desc: "Cursos livres e técnicos, online e presenciais, com foco em quem quer entrar na indústria. A oferta varia por estado.",
+      badges: ["Online e presencial", "Certificado"], url: "https://www.futuro.digital/cursos-gratuitos",
+      courses: [{ name: "Logística", area: "industria" }, { name: "Segurança do Trabalho", area: "industria" }, { name: "Informática e Automação", area: "tecnologia" }] },
+    { name: "Sebrae", mono: "Sb", color: "#17707a", focus: "Empreendedorismo e gestão",
+      desc: "Centenas de cursos online para quem quer abrir ou melhorar um negócio, com cadastro rápido e vagas ilimitadas.",
+      badges: ["100% online", "Certificado"], url: "https://sebrae.com.br/sites/PortalSebrae/cursosonline",
+      courses: [{ name: "Gestão Financeira", area: "gestao" }, { name: "Atendimento ao Cliente", area: "gestao" }, { name: "Marketing Digital", area: "marketing" }] },
+    { name: "Fundação Bradesco", mono: "FB", color: "#c8213a", focus: "Escola Virtual",
+      desc: "Cursos livres de tecnologia, administração e desenvolvimento pessoal, sem exigência de escolaridade.",
+      badges: ["100% online", "Certificado"], url: "https://www.ev.org.br",
+      courses: [{ name: "Excel", area: "tecnologia" }, { name: "Inteligência Artificial", area: "tecnologia" }, { name: "Introdução à Programação", area: "tecnologia" }] },
+    { name: "Google Ateliê Digital", mono: "G", color: "#c46a12", focus: "Habilidades digitais",
+      desc: "Cursos criados pelo Google sobre marketing, dados e carreira, com certificado gratuito ao concluir.",
+      badges: ["100% online", "Certificado"], url: "https://learndigital.withgoogle.com/ateliedigital",
+      courses: [{ name: "Fundamentos de Marketing Digital", area: "marketing" }, { name: "Dados e Métricas para Negócios", area: "tecnologia" }, { name: "Comércio Eletrônico", area: "marketing" }] },
+    { name: "Escola Virtual de Governo", mono: "EV", color: "#4a3f9a", focus: "EV.G · Enap",
+      desc: "Plataforma do governo federal aberta a qualquer cidadão, com centenas de cursos de gestão, dados e direito.",
+      badges: ["100% online", "Certificado", "Acesso gov.br"], url: "https://www.escolavirtual.gov.br",
+      courses: [{ name: "Fundamentos da LGPD", area: "gestao" }, { name: "Gerenciamento de Projetos", area: "gestao" }, { name: "Lógica de Programação com Python", area: "tecnologia" }] }
+  ];
+
+  var questions = [
+    { q: "No seu tempo livre, o que você mais gosta de fazer?", o: { tecnologia: "Descobrir apps, jogos e configurações novas no computador ou celular", gestao: "Organizar a casa, as finanças ou planejar a semana", industria: "Consertar, montar ou desmontar coisas", marketing: "Criar fotos, vídeos ou posts para as redes" } },
+    { q: "Que tipo de problema você gosta de resolver?", o: { tecnologia: "Descobrir por que algo não está funcionando no computador", gestao: "Fazer o dinheiro render até o fim do mês", industria: "Entender como uma máquina ou um processo funciona", marketing: "Convencer alguém de uma ideia" } },
+    { q: "Qual seria seu ambiente de trabalho ideal?", o: { tecnologia: "Home office ou escritório, com um bom computador", gestao: "Um escritório organizado, coordenando tarefas", industria: "Fábrica, oficina ou centro de distribuição, sempre em movimento", marketing: "Loja, agência ou qualquer lugar com contato com o público" } },
+    { q: "Num trabalho em grupo, você normalmente…", o: { tecnologia: "Cuida da parte digital: slides, pesquisas e planilhas", gestao: "Divide as tarefas e cobra os prazos", industria: "Faz a parte prática, como maquetes e montagens", marketing: "Apresenta o trabalho para a turma" } },
+    { q: "O que mais te deixa satisfeito(a)?", o: { tecnologia: "Ver funcionando algo que eu criei", gestao: "Ver metas batidas e tudo dentro do planejado", industria: "Ver um trabalho físico pronto e bem feito", marketing: "Ver pessoas engajadas com algo que eu comuniquei" } },
+    { q: "Qual habilidade você mais quer desenvolver?", o: { tecnologia: "Programar ou analisar dados", gestao: "Liderar e planejar", industria: "Operar equipamentos com segurança", marketing: "Escrever bem e vender" } },
+    { q: "Como você aprende melhor?", o: { tecnologia: "Testando sozinho(a) até dar certo", gestao: "Seguindo um plano com etapas e metas", industria: "Fazendo com as próprias mãos", marketing: "Vendo exemplos e conversando com outras pessoas" } },
+    { q: "Qual notícia chamaria mais sua atenção?", o: { tecnologia: "Lançamento de uma nova inteligência artificial", gestao: "Empresas que mais cresceram no ano", industria: "Uma nova fábrica com milhares de vagas", marketing: "A tendência que viralizou nas redes" } },
+    { q: "Se fosse abrir um negócio, seria…", o: { tecnologia: "Uma empresa de tecnologia ou suporte técnico", gestao: "Uma consultoria ou escritório de contabilidade", industria: "Uma oficina, transportadora ou serviço de manutenção", marketing: "Uma loja nas redes sociais ou agência de divulgação" } },
+    { q: "Como as pessoas costumam te descrever?", o: { tecnologia: "Curioso(a) e lógico(a)", gestao: "Organizado(a) e responsável", industria: "Prático(a) e cuidadoso(a)", marketing: "Comunicativo(a) e criativo(a)" } }
+  ];
+
+  /* ---------- Navegação ---------- */
+  var header = last(".ta-header");
+  var menuBtn = last(".ta-menu-btn");
+  function closeMenu() { header.classList.remove("is-open"); menuBtn.setAttribute("aria-expanded", "false"); }
+  menuBtn.addEventListener("click", function () {
+    var open = header.classList.toggle("is-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  function goTo(name) {
+    var target = last(".ta-sec-" + name);
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    closeMenu();
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-go]");
+    if (b) goTo(b.dataset.go);
+  });
+
+  /* ---------- Plataformas e filtro ---------- */
+  var grid = last(".ta-platforms");
+  grid.innerHTML = platforms.map(function (p) {
+    var list = p.courses.map(function (c) {
+      return '<li class="ta-course" data-area="' + c.area + '" style="--hit:' + areas[c.area].color + '"><span class="ta-course-name">' + esc(c.name) +
+        '</span><span class="ta-tag"><i style="background:' + areas[c.area].color + '"></i>' + areas[c.area].label + '</span></li>';
+    }).join("");
+    return '<article class="ta-plat" data-areas="' + p.courses.map(function (c) { return c.area; }).join(" ") + '" style="--plat-color:' + p.color + '">' +
+      '<div class="ta-plat-top"><div class="ta-mono">' + p.mono + '</div><div><h3 class="ta-plat-name">' + esc(p.name) + '</h3><p class="ta-plat-focus">' + esc(p.focus) + '</p></div></div>' +
+      '<div class="ta-plat-body"><p class="ta-plat-desc">' + esc(p.desc) + '</p>' +
+      '<div class="ta-badges">' + p.badges.map(function (b) { return '<span class="ta-badge">' + b + '</span>'; }).join("") + '</div>' +
+      '<span class="ta-courses-label">Cursos mais procurados</span><ul class="ta-courses">' + list + '</ul>' +
+      '<a class="ta-plat-link" href="' + p.url + '" target="_blank" rel="noopener">Acessar plataforma<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div></article>';
+  }).join("");
+
+  var filter = last(".ta-filter");
+  filter.innerHTML = '<button type="button" class="ta-chip" data-area="todas" aria-pressed="true">Todas as áreas</button>' +
+    areaKeys.map(function (k) { return '<button type="button" class="ta-chip" data-area="' + k + '" aria-pressed="false"><span class="ta-chip-dot" style="background:' + areas[k].color + '"></span>' + areas[k].label + '</button>'; }).join("");
+
+  function applyFilter(area) {
+    filter.querySelectorAll(".ta-chip").forEach(function (c) { c.setAttribute("aria-pressed", c.dataset.area === area ? "true" : "false"); });
+    grid.querySelectorAll(".ta-plat").forEach(function (card) {
+      card.hidden = !(area === "todas" || card.dataset.areas.split(" ").indexOf(area) > -1);
+      card.querySelectorAll(".ta-course").forEach(function (li) { li.classList.toggle("is-hit", area !== "todas" && li.dataset.area === area); });
+    });
+  }
+  filter.addEventListener("click", function (e) { var c = e.target.closest(".ta-chip"); if (c) applyFilter(c.dataset.area); });
+
+  var footPlats = last(".ta-foot-plats");
+  footPlats.innerHTML = platforms.map(function (p) { return '<li><a href="' + p.url + '" target="_blank" rel="noopener">' + esc(p.name) + '</a></li>'; }).join("");
+
+  /* ---------- Teste de carreira ---------- */
+  var areaList = last(".ta-area-list");
+  areaList.innerHTML = areaKeys.map(function (k) {
+    return '<li class="ta-area-item"><span style="background:' + areas[k].color + '"></span><div>' + areas[k].label + '<br><small>' + areas[k].short + '</small></div></li>';
+  }).join("");
+
+  var quiz = last(".ta-quiz");
+  var step = 0;
+  var answers = new Array(questions.length).fill(null);
+  var letters = ["A", "B", "C", "D"];
+  var orders = questions.map(function (_, i) { var o = areaKeys.slice(); for (var j = 0; j < i % 4; j++) o.push(o.shift()); return o; });
+
+  function renderQuestion() {
+    var q = questions[step];
+    var opts = orders[step].map(function (k, i) {
+      return '<button type="button" class="ta-option' + (answers[step] === k ? " is-chosen" : "") + '" data-area="' + k + '"><span class="ta-option-key">' + letters[i] + '</span><span>' + esc(q.o[k]) + '</span></button>';
+    }).join("");
+    quiz.innerHTML =
+      '<div class="ta-quiz-top"><span>Pergunta ' + (step + 1) + ' de ' + questions.length + '</span><span>' + Math.round((step) / questions.length * 100) + '% concluído</span></div>' +
+      '<div class="ta-progress"><div class="ta-progress-bar" style="width:' + ((step + 1) / questions.length * 100) + '%"></div></div>' +
+      '<h3 class="ta-q-title">' + esc(q.q) + '</h3><div class="ta-options">' + opts + '</div>' +
+      '<div class="ta-quiz-nav"><button type="button" class="ta-link-btn ta-q-back"' + (step === 0 ? " disabled" : "") + '>← Voltar</button>' +
+      '<button type="button" class="ta-link-btn ta-q-restart">Recomeçar</button></div>';
+  }
+
+  /* Feedback personalizado */
+  var hybrids = {
+    "gestao+tecnologia": { title: "Tecnologia + Gestão", text: "Você une raciocínio lógico com organização. Esse perfil é muito procurado para cargos que transformam dados em decisões.", careers: ["Analista de dados para negócios", "Assistente de projetos de TI", "Analista de sistemas júnior"] },
+    "industria+tecnologia": { title: "Tecnologia + Indústria", text: "Você gosta de entender como as coisas funcionam, tanto no computador quanto na prática. A indústria moderna depende de gente assim.", careers: ["Técnico(a) em automação", "Auxiliar de manutenção industrial", "Operador(a) de máquinas automatizadas"] },
+    "marketing+tecnologia": { title: "Tecnologia + Marketing", text: "Você combina curiosidade por ferramentas digitais com facilidade para se comunicar. É o perfil do marketing digital e das vendas online.", careers: ["Analista de marketing digital", "Assistente de e-commerce", "Analista de mídias sociais"] },
+    "gestao+industria": { title: "Gestão + Indústria", text: "Você é organizado(a) e prático(a) ao mesmo tempo. Logística e planejamento de produção precisam exatamente dessa mistura.", careers: ["Assistente de logística", "Auxiliar de planejamento de produção", "Almoxarife"] },
+    "gestao+marketing": { title: "Gestão + Marketing", text: "Você sabe planejar e também sabe se comunicar. É um perfil forte para a área comercial e para quem quer empreender.", careers: ["Assistente comercial", "Empreendedor(a) digital", "Atendimento e relacionamento com clientes"] },
+    "industria+marketing": { title: "Indústria + Marketing", text: "Você entende de produto e sabe conversar com pessoas. Empresas industriais valorizam quem consegue vender soluções técnicas.", careers: ["Vendedor(a) técnico(a)", "Representante comercial", "Atendimento técnico ao cliente"] }
+  };
+  var nextTip = {
+    tecnologia: "Monte um portfólio simples com o que você criar nos cursos (planilhas, pequenos programas) e coloque o link no currículo.",
+    gestao: "No currículo, descreva situações em que você organizou algo: uma festa, um orçamento, um projeto da faculdade. Isso conta como experiência.",
+    industria: "Acompanhe os editais do SENAI do seu estado: muitos cursos práticos presenciais gratuitos abrem vagas ao longo do ano.",
+    marketing: "Crie um perfil profissional nas redes e publique o que você aprende. Ele funciona como portfólio para recrutadores."
+  };
+
+  function renderResult() {
+    var score = { tecnologia: 0, gestao: 0, industria: 0, marketing: 0 };
+    answers.forEach(function (a) { if (a) score[a]++; });
+    var ranked = areaKeys.slice().sort(function (a, b) { return score[b] - score[a]; });
+    var top = ranked[0], second = ranked[1], A = areas[top], B = areas[second];
+    var isTie = score[top] === score[second];
+    var hyb = isTie ? hybrids[[top, second].sort().join("+")] : null;
+
+    /* Nível do perfil */
+    var level, levelText;
+    if (isTie) {
+      level = "Perfil híbrido";
+      levelText = "Suas respostas ficaram empatadas entre " + A.label + " e " + B.label + " (" + score[top] + " cada). Isso não é indecisão: é um perfil versátil, que combina duas áreas.";
+    } else if (score[top] >= 7) {
+      level = "Perfil bem definido";
+      levelText = score[top] + " das suas 10 respostas apontam para " + A.label + ". Você parece ter clareza do que gosta, então vale começar um curso dessa área já nesta semana.";
+    } else if (score[top] >= 5) {
+      level = "Tendência forte";
+      levelText = "A maioria das suas respostas (" + score[top] + " de 10) aponta para " + A.label + ", mas " + B.label + " também apareceu bastante (" + score[second] + "). Comece pela primeira e mantenha a segunda no radar.";
+    } else {
+      level = "Perfil explorador";
+      levelText = "Suas respostas se espalharam entre várias áreas, com leve destaque para " + A.label + ". Fazer um curso curto em mais de uma área vai ajudar você a descobrir o que mais combina.";
+    }
+
+    /* Respostas que levaram ao resultado */
+    var picked = [];
+    answers.forEach(function (a, i) { if (a === top && picked.length < 3) picked.push(questions[i].o[a]); });
+    var quotes = picked.map(function (t) { return '<li>“' + esc(t) + '”</li>'; }).join("");
+
+    var bars = ranked.map(function (k) {
+      var pct = Math.round(score[k] / questions.length * 100);
+      return '<div class="ta-bar-row"><span>' + areas[k].label + '</span><div class="ta-bar-track"><div class="ta-bar-fill" style="width:' + pct + '%;background:' + areas[k].color + '"></div></div><b>' + pct + '%</b></div>';
+    }).join("");
+
+    /* Cursos indicados: área principal (e a segunda, se híbrido) */
+    var recAreas = isTie ? [top, second] : [top];
+    var recList = [];
+    platforms.forEach(function (p) { p.courses.forEach(function (c) { if (recAreas.indexOf(c.area) > -1) recList.push({ c: c, p: p }); }); });
+    var recs = recList.map(function (r) { return '<li><a href="' + r.p.url + '" target="_blank" rel="noopener"><strong>' + esc(r.c.name) + '</strong><span>' + esc(r.p.name) + ' ↗</span></a></li>'; }).join("");
+
+    /* Plano de próximos passos */
+    var first = recList[0], other = recList.find(function (r) { return r.p !== first.p; }) || recList[1];
+    var plan = [
+      "Comece por <strong>" + esc(first.c.name) + "</strong> na " + esc(first.p.name) + ". Reserve 2 ou 3 horários fixos por semana.",
+      other ? "Depois do certificado, avance para <strong>" + esc(other.c.name) + "</strong> na " + esc(other.p.name) + "." : "Depois do certificado, explore outro curso da mesma área.",
+      nextTip[top]
+    ].map(function (t) { return '<li>' + t + '</li>'; }).join("");
+
+    var title = hyb ? hyb.title : A.label;
+    var text = hyb ? hyb.text : A.text;
+    var careers = hyb ? hyb.careers : A.careers;
+
+    quiz.innerHTML =
+      '<div class="ta-result-head" style="--res-color:' + A.color + '"><span class="ta-kicker">Seu resultado</span>' +
+      '<span class="ta-res-level">' + level + '</span>' +
+      '<h3 class="ta-result-area">' + title + '</h3><p class="ta-result-text">' + text + '</p></div>' +
+      '<div class="ta-res-feedback"><p>' + levelText + '</p></div>' +
+      '<div class="ta-bars">' + bars + '</div>' +
+      (quotes ? '<div class="ta-result-block"><h4>O que mais pesou nas suas respostas</h4><ul class="ta-res-quotes">' + quotes + '</ul></div>' : '') +
+      '<div class="ta-result-block"><h4>Profissões para explorar</h4><div class="ta-careers">' + careers.map(function (c) { return '<span class="ta-career">' + c + '</span>'; }).join("") + '</div></div>' +
+      '<div class="ta-result-block"><h4>Seu plano em 3 passos</h4><ol class="ta-res-plan">' + plan + '</ol></div>' +
+      '<div class="ta-result-block"><h4>Cursos gratuitos indicados</h4><ul class="ta-rec">' + recs + '</ul></div>' +
+      '<div class="ta-result-actions"><button type="button" class="ta-btn ta-btn-primary ta-q-see" data-area="' + top + '">Ver cursos de ' + A.label + '</button><button type="button" class="ta-btn ta-btn-outline ta-q-restart">Refazer o teste</button></div>' +
+      '<p class="ta-disclaimer">Este teste é um ponto de partida para reflexão, não uma avaliação vocacional profissional.</p>';
+  }
+
+  quiz.addEventListener("click", function (e) {
+    var opt = e.target.closest(".ta-option");
+    if (opt) {
+      answers[step] = opt.dataset.area;
+      opt.classList.add("is-chosen");
+      setTimeout(function () { if (step < questions.length - 1) { step++; renderQuestion(); } else { renderResult(); } }, 220);
+      return;
+    }
+    if (e.target.closest(".ta-q-back") && step > 0) { step--; renderQuestion(); return; }
+    if (e.target.closest(".ta-q-restart")) { step = 0; answers = new Array(questions.length).fill(null); renderQuestion(); return; }
+    var see = e.target.closest(".ta-q-see");
+    if (see) { applyFilter(see.dataset.area); goTo("plataformas"); }
+  });
+
+  renderQuestion();
+})();
+</script>
+
+</body>
+</html>
